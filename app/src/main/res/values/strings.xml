@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">MaReu</string>
+    <string name="your_meeting_subject">Your meeting subject</string>
+    <string name="select_your_room">Select your room :</string>
+    <string name="select_your_date">Select your date</string>
+    <string name="select_the_starting_hour">Select the starting hour</string>
+    <string name="select_your_ending_hour">Select your ending hour</string>
+    <string name="select_your_guests_emails">Select your guests emails</string>
+    <string name="ok">ok</string>
+    <string name="subject">subject</string>
+    <string name="date">date</string>
+    <string name="hour">hour</string>
+    <string name="room">room</string>
+    <string name="guests">guests</string>
+
+    <string-array name="rooms">
+        <item>Room 110</item>
+        <item>Room 120</item>
+        <item>Room 130</item>
+        <item>Room 140</item>
+        <item>Room 150</item>
+    </string-array>
+
+</resources>
