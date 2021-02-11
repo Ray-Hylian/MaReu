@@ -1,4 +1,4 @@
-package com.example.mareu;
+package com.example.mareu.ui.meeting_list;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,8 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mareu.databinding.ActivityListMeetingBinding;
 import com.example.mareu.databinding.ListItemsBinding;
+import com.example.mareu.events.DeleteMeetingEvent;
+import com.example.mareu.model.Meeting;
 
 import org.greenrobot.eventbus.EventBus;
 

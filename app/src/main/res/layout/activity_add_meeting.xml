@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddMeeting">
+    tools:context=".ui.meeting_list.AddMeeting"
+    android:fillViewport="true"
+    >
+
+ <androidx.constraintlayout.widget.ConstraintLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
 
    <EditText
-       android:id="@+id/meetingSubjectTxt"
+       android:id="@+id/meetingSubject"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
        app:layout_constraintTop_toTopOf="parent"
@@ -16,60 +22,52 @@
        android:hint="@string/your_meeting_subject"
        android:layout_margin="20dp"
        />
-    <TextView
+   <TextView
         android:id="@+id/spinnerPresentation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/meetingSubjectTxt"
+        app:layout_constraintTop_toBottomOf="@id/meetingSubject"
         app:layout_constraintStart_toStartOf="parent"
         android:text="@string/select_your_room"
         android:layout_margin="20dp"
         />
-    <Spinner
-        android:id="@+id/roomSpinner"
+   <Spinner
+        android:id="@+id/meetingLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/spinnerPresentation"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="20dp"
         />
-    <TextView
+   <TextView
         android:id="@+id/meetingDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/roomSpinner"
+        app:layout_constraintTop_toBottomOf="@id/meetingLocation"
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/select_your_date"
         android:layout_margin="20dp"
         />
-    <TextView
-        android:id="@+id/startingHour"
+   <TextView
+        android:id="@+id/meetingHour"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/meetingDate"
         app:layout_constraintStart_toStartOf="parent"
-        android:hint="@string/select_the_starting_hour"
+        android:hint="@string/select_your_hour"
         android:layout_margin="20dp"
         />
-    <TextView
-        android:id="@+id/endingHour"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/startingHour"
-        app:layout_constraintStart_toStartOf="parent"
-        android:hint="@string/select_your_ending_hour"
-        android:layout_margin="20dp"
-        />
-    <EditText
+
+   <EditText
         android:id="@+id/meetingGuests"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/endingHour"
+        app:layout_constraintTop_toBottomOf="@id/meetingHour"
         app:layout_constraintStart_toStartOf="parent"
         android:hint="@string/select_your_guests_emails"
         android:layout_margin="20dp"
         />
-    <Button
+   <Button
         android:id="@+id/validateMeetingBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,11 +78,7 @@
         android:layout_margin="20dp"
         />
 
+ </androidx.constraintlayout.widget.ConstraintLayout>
 
+</androidx.core.widget.NestedScrollView>
 
-
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>

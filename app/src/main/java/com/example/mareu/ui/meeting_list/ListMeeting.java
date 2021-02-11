@@ -1,4 +1,4 @@
-package com.example.mareu;
+package com.example.mareu.ui.meeting_list;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.mareu.DI.DI;
 import com.example.mareu.databinding.ActivityListMeetingBinding;
 
 
@@ -21,8 +22,8 @@ public class ListMeeting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         initView();
-        initList();
-        addMeeting();
+        //initList();
+        //addMeeting();
     }
 
     private void initView(){
@@ -38,6 +39,7 @@ public class ListMeeting extends AppCompatActivity {
         binding.meetingList.setAdapter(meetingAdapter);
     }
 
+    /*
     private void addMeeting(){
         binding.addMeetingFab.setOnClickListener((new View.OnClickListener() {
             @Override
@@ -46,5 +48,14 @@ public class ListMeeting extends AppCompatActivity {
                 startActivity(intent);
             }
         }));
+    }
+*/
+    private void addMeeting(){AddMeeting.navigate(this);}
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initList();
     }
 }

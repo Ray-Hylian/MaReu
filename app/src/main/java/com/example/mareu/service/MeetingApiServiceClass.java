@@ -1,4 +1,8 @@
-package com.example.mareu;
+package com.example.mareu.service;
+
+import com.example.mareu.model.Meeting;
+import com.example.mareu.service.MeetingApiService;
+import com.example.mareu.service.MeetingGenerator;
 
 import java.util.List;
 

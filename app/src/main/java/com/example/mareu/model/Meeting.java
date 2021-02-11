@@ -1,4 +1,4 @@
-package com.example.mareu;
+package com.example.mareu.model;
 
 public class Meeting {
 

@@ -13,6 +13,7 @@
     <string name="room">room</string>
     <string name="guests">guests</string>
 
+
     <string-array name="rooms">
         <item>Room 110</item>
         <item>Room 120</item>
@@ -20,5 +21,18 @@
         <item>Room 140</item>
         <item>Room 150</item>
     </string-array>
+
+    <string name="display_date_format">EEEE d MMMM yyyy</string>
+    <string name="display_hour_format">HH:mm</string>
+
+    <integer name="default_minute">1</integer>
+    <integer name="default_hour">12</integer>
+    <integer name="default_year">2021</integer>
+    <integer name="default_month">1</integer>
+    <integer name="default_day">1</integer>
+
+    <string name="empty_infos">Please fill all the fields !</string>
+    <string name="select_your_hour">Select your hour</string>
+
 
 </resources>
