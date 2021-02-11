@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.mareu.DI.DI;
 import com.example.mareu.R;
 import com.example.mareu.databinding.ActivityAddMeetingBinding;
 import com.example.mareu.model.Meeting;
@@ -42,6 +43,7 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
         super.onCreate(savedInstanceState);
 
         initView();
+        meetingApiService = DI.getMeetingApiService();
         initClickListener();
         onDatePickerSet();
         onTimePickerSet();
@@ -57,28 +59,28 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
     }
 
     /**
-     * Room spinner configuration
+     * Create new meeting if he user fill the date and the hour
      */
-    private void initSpinner() {
-        Spinner spinner = binding.meetingLocation;
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.rooms, android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
-    }
+    private void initClickListener(){
+        binding.validateMeetingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(binding.meetingDate.getText().toString().isEmpty() || binding.meetingHour.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(), getString(R.string.empty_infos), Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    String meetingSubject = binding.meetingSubject.getText().toString();
+                    String meetingDate = binding.meetingDate.getText().toString();
+                    String meetingHour = binding.meetingHour.getText().toString();
+                    String meetingLocation = binding.meetingLocation.getSelectedItem().toString();
+                    String meetingGuests = binding.meetingGuests.getText().toString();
 
-    /**
-     * OK button configuration
-     */
-    private void createMeeting() {
-        String meetingSubject = binding.meetingSubject.getText().toString();
-        String meetingDate = binding.meetingDate.getText().toString();
-        String meetingHour = binding.meetingHour.getText().toString();
-        String meetingLocation = binding.meetingLocation.getSelectedItem().toString();
-        String meetingGuests = binding.meetingGuests.getText().toString();
-
-        Meeting meeting = new Meeting(meetingSubject, meetingDate, meetingHour, meetingLocation, meetingGuests);
-        meetingApiService.createMeeting(meeting);
-        finish();
+                    Meeting meeting = new Meeting(meetingSubject, meetingDate, meetingHour, meetingLocation, meetingGuests);
+                    meetingApiService.createMeeting(meeting);
+                    finish();
+                }
+            }
+        });
     }
 
     /**
@@ -129,24 +131,12 @@ public class AddMeeting extends AppCompatActivity implements DatePickerDialog.On
     }
 
     /**
-     * The user must fill the date and the hours
+     * Room spinner configuration
      */
-    private void initClickListener(){
-        binding.validateMeetingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(binding.meetingDate.getText().toString().isEmpty() || binding.meetingHour.getText().toString().isEmpty()){
-                    Toast.makeText(getApplicationContext(), getString(R.string.empty_infos), Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    finish();
-                }
-            }
-        });
-    }
-
-    public static void navigate(FragmentActivity activity){
-        Intent intent = new Intent(activity, AddMeeting.class);
-        ActivityCompat.startActivity(activity, intent, null);
+    private void initSpinner() {
+        Spinner spinner = binding.meetingLocation;
+        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.rooms, android.R.layout.simple_spinner_item);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
     }
 }

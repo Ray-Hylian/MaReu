@@ -41,6 +41,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
         holder.binding.hour.setText(((meeting.getHour())));
         holder.binding.room.setText(((meeting.getRoom())));
         holder.binding.guests.setText(((meeting.getGuests())));
+        
         holder.binding.deleteMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

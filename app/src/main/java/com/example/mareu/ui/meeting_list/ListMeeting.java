@@ -22,8 +22,8 @@ public class ListMeeting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         initView();
-        //initList();
-        //addMeeting();
+        initList();
+        addMeeting();
     }
 
     private void initView(){
@@ -39,7 +39,6 @@ public class ListMeeting extends AppCompatActivity {
         binding.meetingList.setAdapter(meetingAdapter);
     }
 
-    /*
     private void addMeeting(){
         binding.addMeetingFab.setOnClickListener((new View.OnClickListener() {
             @Override
@@ -49,9 +48,6 @@ public class ListMeeting extends AppCompatActivity {
             }
         }));
     }
-*/
-    private void addMeeting(){AddMeeting.navigate(this);}
-
 
     @Override
     protected void onResume() {
