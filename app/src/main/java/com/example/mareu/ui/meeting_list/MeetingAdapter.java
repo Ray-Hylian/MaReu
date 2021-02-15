@@ -45,7 +45,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.MeetingV
         holder.binding.deleteMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EventBus.getDefault().post(new DeleteMeetingEvent((meeting)));
+                EventBus.getDefault().post(new DeleteMeetingEvent(meeting));
             }
         });
     }

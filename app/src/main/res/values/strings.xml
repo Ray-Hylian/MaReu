@@ -33,6 +33,9 @@
 
     <string name="empty_infos">Please fill all the fields !</string>
     <string name="select_your_hour">Select your hour</string>
+    <string name="filter_by_date">filter by date</string>
+    <string name="filter_by_room">filter by room</string>
+    <string name="show_all_meetings">show all meetings</string>
 
 
 </resources>
