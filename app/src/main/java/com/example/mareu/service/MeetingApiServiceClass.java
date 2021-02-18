@@ -28,11 +28,10 @@ public class MeetingApiServiceClass implements MeetingApiService {
 
     @Override
     public List<Meeting> getMeetingByRoom(String room) {
-        List<Meeting> meetingList = getMeeting();
         List<Meeting> meetingByRoom = new ArrayList<>();
-        for (int i = 0; i < meetingList.size(); i++) {
-            if (meetingList.get(i).getRoom().equals(room)) {
-                meetingByRoom.add(meetingList.get(i));
+        for (int i = 0; i < meetings.size(); i++) {
+            if (meetings.get(i).getRoom().equals(room)) {
+                meetingByRoom.add(meetings.get(i));
             }
         }
         return meetingByRoom;

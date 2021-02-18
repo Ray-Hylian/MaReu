@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,19 +21,26 @@ import android.widget.Spinner;
 import com.example.mareu.DI.DI;
 import com.example.mareu.R;
 import com.example.mareu.databinding.ActivityListMeetingBinding;
+import com.example.mareu.events.DeleteMeetingEvent;
 import com.example.mareu.model.Meeting;
 import com.example.mareu.service.MeetingApiService;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 
-public class ListMeeting extends AppCompatActivity {
+public class ListMeeting extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
     ActivityListMeetingBinding binding;
-    MeetingAdapter meetingAdapter;
     private MeetingApiService meetingApiService;
+    private DatePickerDialog datePickerDialog;
+    private Calendar calendar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +49,25 @@ public class ListMeeting extends AppCompatActivity {
         meetingApiService = DI.getMeetingApiService();
 
         initView();
-        initList();
         addMeeting();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initList(meetingApiService.getMeeting());
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
     private void initView(){
@@ -48,12 +75,11 @@ public class ListMeeting extends AppCompatActivity {
         setContentView(binding.getRoot());
     }
 
-    private void initList(){
-        meetingAdapter = new MeetingAdapter(DI.getMeetingApiService().getMeeting(), getApplicationContext());
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager((this));
-        binding.meetingList.setLayoutManager(layoutManager);
+    private void initList(List<Meeting> meetings){
+        MeetingAdapter adapter = new MeetingAdapter(meetings);
+        binding.meetingList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         binding.meetingList.setHasFixedSize(true);
-        binding.meetingList.setAdapter(meetingAdapter);
+        binding.meetingList.setAdapter(adapter);
     }
 
     private void addMeeting(){
@@ -66,40 +92,81 @@ public class ListMeeting extends AppCompatActivity {
         }));
     }
 
+    @Subscribe
+    public void onDeleteMeeting(DeleteMeetingEvent event){
+        meetingApiService.deleteMeeting(event.meeting);
+        initList(meetingApiService.getMeeting());
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
-    /*
+
+    /**
+     * filters configuration
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(R.id.filterRoom){
-            filterByRoom(); return true;
-        }
-        if(R.id.filterDate){
-            filterByDate(); return true;
-        }
-        if(R.id.cancel){
-            initList();
+        switch (item.getItemId()) {
+            case R.id.filterRoom:
+                return true;
+            case R.id.filterDate:
+                onDatePickerSet();
+                return true;
+            case R.id.cancel:
+                // no filters
+                initList(meetingApiService.getMeeting());
+                return true;
+            default:
+                initList(meetingApiService.getMeetingByRoom(item.getTitle().toString()));
+                return true;
         }
     }
-
-     */
 
     /*
     private void filterByRoom(){
-        Spinner spinner = findViewById(R.id.spinnerMenu);
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(this, R.array.rooms, android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
+        AlertDialog.Builder mBuilder = new AlertDialog.Builder(ListMeeting.this);
+        View v = getLayoutInflater().inflate(R.layout.spinner_menu, null);
+        mBuilder.setTitle(getString(R.string.room_filter));
+
+        Spinner spinner = v.findViewById(R.id.spinnerMenu);
+        ArrayAdapter<String> roomAdapter = new ArrayAdapter<>(this, R.layout.spinner_text, getResources().getStringArray(R.array.rooms));
+        roomAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(roomAdapter);
+
+        mBuilder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                initList(meetingApiService.getMeetingByRoom(spinner.getSelectedItem().toString()));
+            }
+        });
+        mBuilder.setView(v);
+        AlertDialog dialog = mBuilder.create();
+        dialog.show();
     }
-
-    private void filterByDate(){
-
-    }
-
      */
+
+    private void onDatePickerSet() {
+        calendar = Calendar.getInstance();
+        datePickerDialog = new DatePickerDialog(this, ListMeeting.this,
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)
+        );
+        datePickerDialog.show();
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        calendar.set(year, month, dayOfMonth);
+        SimpleDateFormat displayDateFormater = new SimpleDateFormat(getString(R.string.display_date_format), Locale.FRANCE);
+        String output = displayDateFormater.format(calendar.getTime());
+        initList(meetingApiService.getMeetingByDate(output));
+    }
 
 }

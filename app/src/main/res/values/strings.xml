@@ -15,14 +15,20 @@
 
 
     <string-array name="rooms">
-        <item>Room 110</item>
-        <item>Room 120</item>
-        <item>Room 130</item>
-        <item>Room 140</item>
-        <item>Room 150</item>
+        <item>Mario</item>
+        <item>Peach</item>
+        <item>Yoshi</item>
+        <item>Wario</item>
+        <item>Bowser</item>
+        <item>Luigi</item>
+        <item>Toad</item>
+        <item>Daisy</item>
+        <item>Bob omb</item>
+        <item>Maskass</item>
+
     </string-array>
 
-    <string name="display_date_format">EEEE d MMMM yyyy</string>
+    <string name="display_date_format">dd/MM/yyyy</string>
     <string name="display_hour_format">HH:mm</string>
 
     <integer name="default_minute">1</integer>
@@ -36,6 +42,10 @@
     <string name="filter_by_date">filter by date</string>
     <string name="filter_by_room">filter by room</string>
     <string name="show_all_meetings">show all meetings</string>
+
+    <string name="room_filter">Please choose a room</string>
+    <string name="date_filter">Please choose a date</string>
+    <string name="subject_hour_room">Subject - hour - room</string>
 
 
 </resources>
