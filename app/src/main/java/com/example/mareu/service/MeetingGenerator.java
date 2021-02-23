@@ -15,7 +15,7 @@ public class MeetingGenerator {
             new Meeting ("meeting for fun", "28/03/2021", "13:30", "Peach", "richard.alpert@lamzone.com, pierre.chang@lamzone.com, james.ford@lamzone.com")
             );
 
-    static List<Meeting> generateMeeting() {
+    public static List<Meeting> generateMeeting() {
         return new ArrayList<>(generateMeeting);
     }
 }
