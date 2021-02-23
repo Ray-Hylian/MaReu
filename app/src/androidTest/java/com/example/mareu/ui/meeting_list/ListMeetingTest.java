@@ -21,14 +21,11 @@ import org.junit.runner.RunWith;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -39,44 +36,7 @@ public class ListMeetingTest {
 
     @Test
     public void listMeetingTest() {
-        ViewInteraction overflowMenuButton = onView(
-                allOf(withContentDescription("More options"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.action_bar),
-                                        1),
-                                0),
-                        isDisplayed()));
-        overflowMenuButton.perform(click());
 
-        ViewInteraction materialTextView = onView(
-                allOf(withId(R.id.title), withText("filter by date"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        materialTextView.perform(click());
-
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withClassName(is("androidx.appcompat.widget.AppCompatImageButton")), withContentDescription("Next month"),
-                        childAtPosition(
-                                allOf(withClassName(is("android.widget.DayPickerView")),
-                                        childAtPosition(
-                                                withClassName(is("com.android.internal.widget.DialogViewAnimator")),
-                                                0)),
-                                2)));
-        appCompatImageButton.perform(scrollTo(), click());
-
-        ViewInteraction materialButton = onView(
-                allOf(withId(android.R.id.button1), withText("OK"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withClassName(is("android.widget.ScrollView")),
-                                        0),
-                                3)));
-        materialButton.perform(scrollTo(), click());
     }
 
     private static Matcher<View> childAtPosition(

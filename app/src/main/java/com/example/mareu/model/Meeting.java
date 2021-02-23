@@ -1,5 +1,7 @@
 package com.example.mareu.model;
 
+import java.util.Calendar;
+
 public class Meeting {
 
     private String subject;
@@ -24,9 +26,7 @@ public class Meeting {
         this.subject = subject;
     }
 
-    public String getDate() {
-        return date;
-    }
+    public String getDate() { return date; }
 
     public void setDate(String date) {
         this.date = date;

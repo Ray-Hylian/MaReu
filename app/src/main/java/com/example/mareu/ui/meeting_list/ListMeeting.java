@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -33,6 +34,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.mareu.DI.DI.clearApiService;
+
 
 public class ListMeeting extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -50,6 +53,11 @@ public class ListMeeting extends AppCompatActivity implements DatePickerDialog.O
 
         initView();
         addMeeting();
+
+        int orientation = getResources().getConfiguration().orientation;
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            clearApiService();
+        }
     }
 
     @Override
