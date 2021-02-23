@@ -190,6 +190,40 @@ public class InstrumentedTest {
 
         assertEquals(2, meetingApiService.getMeetingByDate("01/03/2021").size());
     }
+
+    /*
+    @Test
+    public void myMeetingList_shouldFilterByDate2() {
+
+        //open menu
+        ViewInteraction overflowMenuButton = onView(
+                allOf(withContentDescription("More options"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.action_bar),
+                                        1),
+                                0),
+                        isDisplayed()));
+        overflowMenuButton.perform(click());
+
+        //click on date filter choice
+        ViewInteraction materialTextView = onView(
+                allOf(withId(R.id.title), withText("filter by date"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(R.id.content),
+                                        0),
+                                0),
+                        isDisplayed()));
+        materialTextView.perform(click());
+
+        //select a date from the calendar and validate
+        ViewInteraction materialButton = onView(
+                allOf(
+                setDate(2021,03,01)));
+        materialButton.perform(scrollTo(), click());
+    }
+     */
 }
 
 
