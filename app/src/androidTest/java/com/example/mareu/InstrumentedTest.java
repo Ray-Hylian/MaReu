@@ -96,7 +96,6 @@ public class InstrumentedTest {
     }
 
     public static void setDate(int year, int monthOfYear, int dayOfMonth) {
-        onView(withId(R.id.filterDate)).perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(PickerActions.setDate(year, monthOfYear, dayOfMonth));
         onView(withId(android.R.id.button1)).perform(click());
     }
@@ -177,23 +176,8 @@ public class InstrumentedTest {
         materialTextView2.perform(click());
     }
 
-    public void myMeetingList_shouldFilterByDate() {
-        Meeting meeting1 = new Meeting ("MaReu presentation", "01/03/2021", "09:00", "Mario", "desmond.humes@lamzone.com, kate.austen@lamzone.com, juliet.burke@lamzone.com, pierre.chang@lamzone.com");
-        Meeting meeting2 = new Meeting ("research and development", "15/03/2021", "15:00", "Yoshi", "jack.shephard@lamzone.com, sayid.jarrah@lamzone.com");
-        Meeting meeting3 = new Meeting ("meeting for fun", "28/03/2021", "13:30", "Peach", "richard.alpert@lamzone.com, pierre.chang@lamzone.com, james.ford@lamzone.com");
-
-        meetingApiService.createMeeting(meeting1);
-        meetingApiService.createMeeting(meeting2);
-        meetingApiService.createMeeting(meeting3);
-
-        meetingApiService.getMeeting();
-
-        assertEquals(2, meetingApiService.getMeetingByDate("01/03/2021").size());
-    }
-
-    /*
     @Test
-    public void myMeetingList_shouldFilterByDate2() {
+    public void myMeetingList_shouldFilterByDate() {
 
         //open menu
         ViewInteraction overflowMenuButton = onView(
@@ -218,12 +202,11 @@ public class InstrumentedTest {
         materialTextView.perform(click());
 
         //select a date from the calendar and validate
-        ViewInteraction materialButton = onView(
-                allOf(
-                setDate(2021,03,01)));
-        materialButton.perform(scrollTo(), click());
+        setDate(2021,3,1);
+        //update the recycler view
+        onView(Matchers.allOf(ViewMatchers.withId(R.id.meetingList), isDisplayed())).check(withItemCount(ITEMS_COUNT - 2));
     }
-     */
+
 }
 
 
