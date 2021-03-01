@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.meeting_list.AddMeeting"
+    android:fillViewport="true"
+    android:id="@+id/addMeetingLayout"
+    >
+
+ <androidx.constraintlayout.widget.ConstraintLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent">
+
+   <EditText
+       android:id="@+id/meetingSubject"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       android:hint="@string/your_meeting_subject"
+       android:layout_margin="20dp"
+       />
+   <TextView
+        android:id="@+id/spinnerPresentation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/meetingSubject"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/select_your_room"
+        android:layout_margin="20dp"
+        />
+   <Spinner
+        android:id="@+id/meetingLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/spinnerPresentation"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="20dp"
+        />
+   <TextView
+        android:id="@+id/meetingDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/meetingLocation"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="@string/select_your_date"
+        android:layout_margin="20dp"
+        />
+   <TextView
+        android:id="@+id/meetingHour"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/meetingDate"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="@string/select_your_hour"
+        android:layout_margin="20dp"
+        />
+
+   <EditText
+        android:id="@+id/meetingGuests"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/meetingHour"
+        app:layout_constraintStart_toStartOf="parent"
+        android:hint="@string/select_your_guests_emails"
+       android:inputType="textEmailAddress"
+       android:layout_margin="20dp"
+        />
+   <Button
+        android:id="@+id/validateMeetingBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/meetingGuests"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="@string/ok"
+        android:layout_margin="20dp"
+        />
+
+ </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
+
